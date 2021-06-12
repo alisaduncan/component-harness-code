@@ -1,0 +1,11 @@
+<div class="tidy-task">
+  <mat-checkbox color="accent"
+                [checked]="tidyTask.completed"
+                (change)="onChecked()"
+                [ngClass]="tidyTask.completed ? 'tidy-task-completed' : ''">
+    {{tidyTask.description}}
+  </mat-checkbox>
+  <button mat-icon-button color="accent" (click)="onDeleted()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
