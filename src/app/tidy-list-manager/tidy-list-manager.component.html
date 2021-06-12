@@ -1,0 +1,21 @@
+<div class="tidy-list">
+  <h2 class="mat-title">What should we tackle today?</h2>
+
+  <div class="tidy-list-main mat-elevation-z4">
+    <mat-form-field>
+      <mat-label>I need to...</mat-label>
+      <input matInput type="text" [(ngModel)]="newTidyListItem">
+      <button mat-icon-button color="accent" *ngIf="newTidyListItem" matSuffix (click)="addTidyListItem(newTidyListItem)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <ul>
+      <li *ngFor="let item of tidyList$ | async">
+        <app-tidy-task [tidyTask]="item" (changed)="onTidyListItemChanged(item)" (deleted)="onTidyListItemDeleted(item)"></app-tidy-task>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

@@ -1,0 +1,28 @@
+.tidy-list {
+  margin: 2rem 0;
+
+  & > h2 {
+    text-align: center;
+  }
+
+  & > .tidy-list-main {
+    margin: auto;
+    width: 70%;
+
+    & > mat-form-field {
+      padding: 1.5rem;
+      width: 30%;
+
+      &  mat-icon {
+        font-size: 1.2rem;
+      }
+    }
+
+    & > ul {
+      min-width: 400px;
+      list-style-type: none;
+      padding: 1.5rem;
+      margin: 0;
+    }
+  }
+}
