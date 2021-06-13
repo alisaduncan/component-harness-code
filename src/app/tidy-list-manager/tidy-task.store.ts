@@ -7,9 +7,10 @@ interface TidyTasksState {
   tasks: TidyTask[]
 }
 
-const defaultTasks = [
-  { id: 1, description: 'Gather all books', completed: false},
-  { id: 2, description: 'Sort by category', completed: false}
+const defaultTasks: TidyTask[] = [
+  { id: 1, description: 'Gather all books', completed: true, rating: 1},
+  { id: 2, description: 'Sort by category', completed: false, rating: 2},
+  { id: 3, description: 'Donate books that available online', completed: false, rating: 5}
 ];
 
 @Injectable()

@@ -10,6 +10,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconHarness } from '@angular/material/icon/testing';
+import { MatBadgeModule } from '@angular/material/badge';
 
 describe('TidyTaskComponent - with testing harnesses', () => {
   let component: TidyTaskComponent;
@@ -22,14 +23,15 @@ describe('TidyTaskComponent - with testing harnesses', () => {
         NoopAnimationsModule,
         MatIconModule,
         MatButtonModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatBadgeModule
       ],
       declarations: [ TidyTaskComponent ]
     });
 
     fixture = TestBed.createComponent(TidyTaskComponent);
     component = fixture.componentInstance;
-    component.tidyTask = {id: 1, description: 'tidy task', completed: false}
+    component.tidyTask = {id: 1, description: 'tidy task', completed: false, rating: 3}
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
@@ -39,9 +41,9 @@ describe('TidyTaskComponent - with testing harnesses', () => {
   });
 
   it('should display a checkbox, task description, and a delete button', async () => {
-    component.tidyTask = {id: 1, description: 'tidy up!', completed: false};
+    component.tidyTask = {id: 1, description: 'tidy up!', completed: false, rating: 3};
     fixture.detectChanges();
-    expect(async () => await loader.getHarness(MatCheckboxHarness.with({label: 'tidy up!'}))).not.toThrow();
+    await expectAsync(loader.getHarness(MatCheckboxHarness.with({label: 'tidy up!'}))).toBeResolved();
 
     const deleteBtns = await loader.getAllHarnesses(MatButtonHarness.with({text: 'delete'}));
     expect(deleteBtns.length).toBe(1);
@@ -58,7 +60,7 @@ describe('TidyTaskComponent - with testing harnesses', () => {
     expect(await checkbox.isChecked()).toBeFalse();
     expect(await checkboxHost.hasClass('tidy-task-completed')).not.toBeTrue();
 
-    component.tidyTask = {id: 1, description: 'tidy up!', completed: true}
+    component.tidyTask = {id: 1, description: 'tidy up!', completed: true, rating: 3}
     fixture.detectChanges();
 
     expect(await checkbox.isChecked()).toBeTrue();

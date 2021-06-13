@@ -1,0 +1,16 @@
+.tidy-task-input {
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+
+  & > mat-form-field {
+    width: 50%;
+  }
+
+  & > *+* {
+    margin-left: 1rem;
+  }
+}
+
+
+
