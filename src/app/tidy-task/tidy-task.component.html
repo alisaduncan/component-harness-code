@@ -5,7 +5,10 @@
                 [ngClass]="tidyTask.completed ? 'tidy-task-completed' : ''">
     {{tidyTask.description}}
   </mat-checkbox>
-  <button mat-icon-button color="accent" (click)="onDeleted()">
-    <mat-icon>delete</mat-icon>
-  </button>
+  <div class="actions">
+    <mat-icon matBadge="{{tidyTask.rating}}" matBadgeColor="primary">favorite_border</mat-icon>
+    <button mat-icon-button color="accent" (click)="onDeleted()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </div>

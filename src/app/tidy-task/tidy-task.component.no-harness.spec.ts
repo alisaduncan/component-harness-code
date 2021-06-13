@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { MatBadgeModule } from '@angular/material/badge';
 
 describe('TidyTaskComponent - no testing harnesses', () => {
   let component: TidyTaskComponent;
@@ -17,14 +18,15 @@ describe('TidyTaskComponent - no testing harnesses', () => {
         NoopAnimationsModule,
         MatIconModule,
         MatButtonModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatBadgeModule
       ],
       declarations: [ TidyTaskComponent ]
     });
 
     fixture = TestBed.createComponent(TidyTaskComponent);
     component = fixture.componentInstance;
-    component.tidyTask = {id: 1, description: 'tidy up!', completed: false}
+    component.tidyTask = {id: 1, description: 'tidy up!', completed: false, rating: 3}
     fixture.detectChanges();
   });
 
@@ -32,7 +34,7 @@ describe('TidyTaskComponent - no testing harnesses', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display a checkbox, task description, and a delete button', () => {
+  it('should display a checkbox, task description, a badge, and a delete button', () => {
     const matCheckbox = fixture.debugElement.query(By.css('mat-checkbox'));
     expect(matCheckbox).toBeTruthy();
     const checkBoxEl = matCheckbox.query(By.css('input'));
@@ -42,6 +44,11 @@ describe('TidyTaskComponent - no testing harnesses', () => {
     const checkBoxTextEl = matCheckbox.query(By.css('.mat-checkbox-label'));
     expect(checkBoxTextEl).toBeTruthy();
     expect(checkBoxTextEl.nativeElement.innerText).toBe('tidy up!');
+
+    const badgeEl = fixture.debugElement.query(By.css('.mat-badge'));
+    expect(badgeEl).toBeTruthy();
+    const badgeCountEl = fixture.debugElement.query(By.css('span.mat-badge-content'));
+    expect(badgeCountEl.nativeElement.innerText).toBe('3')
 
     const deleteBtn = fixture.debugElement.query(By.css('button'));
     expect(deleteBtn).toBeTruthy();
@@ -58,7 +65,7 @@ describe('TidyTaskComponent - no testing harnesses', () => {
     expect(checkBoxEl.nativeElement.checked).toBe(false, 'checkbox should not be checked');
     expect(matCheckbox.nativeElement.classList).not.toContain('tidy-task-completed');
 
-    component.tidyTask = {id: 1, description: 'tidy up!', completed: true}
+    component.tidyTask = {id: 1, description: 'tidy up!', completed: true, rating: 3}
     fixture.detectChanges();
 
     expect(checkBoxEl.nativeElement.checked).toBe(true, 'checkbox should be checked');

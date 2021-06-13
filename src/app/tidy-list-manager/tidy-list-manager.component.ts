@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TidyTask } from '../models/tidy-task';
 import { TidyTaskStore } from './tidy-task.store';
 
@@ -11,7 +11,6 @@ import { TidyTaskStore } from './tidy-task.store';
 })
 export class TidyListManagerComponent implements OnInit {
   public tidyList$! : Observable<TidyTask[]>;
-  public newTidyListItem: string|undefined;
 
   constructor(private readonly tidyTaskStore: TidyTaskStore ) { }
 
@@ -19,8 +18,8 @@ export class TidyListManagerComponent implements OnInit {
     this.tidyList$ = this.tidyTaskStore.selectTidyTasks$;
   }
 
-  public addTidyListItem(description: string): void {
-    this.tidyTaskStore.addTidyTask({description, completed: false} as TidyTask);
+  public addTidyListItem(tidyTask: TidyTask): void {
+    this.tidyTaskStore.addTidyTask(tidyTask);
   }
 
   public onTidyListItemChanged(item: TidyTask): void {
