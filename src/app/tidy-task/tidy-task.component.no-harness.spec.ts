@@ -26,7 +26,7 @@ describe('TidyTaskComponent - no testing harnesses', () => {
 
     fixture = TestBed.createComponent(TidyTaskComponent);
     component = fixture.componentInstance;
-    component.tidyTask = {id: 1, description: 'tidy up!', completed: false, rating: 3}
+    component.tidyTask = {id: 1, description: 'tidy task', completed: false, rating: 3}
     fixture.detectChanges();
   });
 
@@ -35,6 +35,9 @@ describe('TidyTaskComponent - no testing harnesses', () => {
   });
 
   it('should display a checkbox, task description, a badge, and a delete button', () => {
+    component.tidyTask = {id: 1, description: 'tidy up!', completed: false, rating: 3};
+    fixture.detectChanges();
+
     const matCheckbox = fixture.debugElement.query(By.css('mat-checkbox'));
     expect(matCheckbox).toBeTruthy();
     const checkBoxEl = matCheckbox.query(By.css('input'));
@@ -72,7 +75,7 @@ describe('TidyTaskComponent - no testing harnesses', () => {
     expect(matCheckbox.nativeElement.classList).toContain('tidy-task-completed');
   });
 
-  it('should toggle the task between complete and incomplete', () => {
+  it('should apply completed class to match task completion', () => {
     const matCheckbox = fixture.debugElement.query(By.css('mat-checkbox'));
     expect(matCheckbox).toBeTruthy();
     const checkBoxEl = matCheckbox.query(By.css('input'));
