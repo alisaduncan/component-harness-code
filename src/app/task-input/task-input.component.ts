@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { merge, Observable, Subject } from 'rxjs';
 import { TidyTask } from '../models/tidy-task';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -9,11 +9,11 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   template: `
     <div class="tidy-task-input">
       <mat-form-field>
-        <mat-label>I need to...</mat-label>
+        <mat-label>Time to tidy...</mat-label>
         <input matInput type="text" [(ngModel)]="description" (ngModelChange)="onDescriptionChanged($event)">
       </mat-form-field>
       <app-sentiment-rating [rate]="rating" (changed)="onRatingChanged($event)"></app-sentiment-rating>
-      <button mat-icon-button color="accent" *ngIf="valid$ | async" (click)="onTidyTaskCreated()">
+      <button mat-icon-button color="accent" [disabled]="!(valid$ | async)" (click)="onTidyTaskCreated()">
         <mat-icon>add_box</mat-icon>
       </button>
     </div>
@@ -32,14 +32,14 @@ export class TaskInputComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.valid$ = combineLatest([
+    this.valid$ = merge(
       this.descriptionSub$.pipe(
         debounceTime(100),
         distinctUntilChanged()
         ),
       this.ratingSub$
-    ]).pipe(
-      map(([description, rating]: [string, number]) => !!description && !!rating)
+    ).pipe(
+      map(() => !!this.description && !!this.rating)
     );
   }
 

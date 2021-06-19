@@ -44,11 +44,12 @@ describe('TaskInputComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not show add add button until task text is added and task is rated', fakeAsync(async () => {
+  it('should disable add button until task text is added and task is rated', fakeAsync(async () => {
     const ratingChangedSpy = spyOn(component, 'onRatingChanged').and.callThrough();
     const descriptionChangedSpy = spyOn(component, 'onDescriptionChanged').and.callThrough();
 
-    await expectAsync(loader.getHarness(MatButtonHarness.with({text: 'add_box'}))).toBeRejected();
+    const btn = await loader.getHarness(MatButtonHarness.with({text: 'add_box'}));
+    expect(await btn.isDisabled()).toBeTruthy();
     const input = await loader.getHarness(MatInputHarness);
     await input.setValue('Test task');
 
