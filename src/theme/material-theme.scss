@@ -1,0 +1,24 @@
+@use '~@angular/material/index' as mat;
+@use '../app/tidy-list-manager/tidy-list-manager.component.theme' as tidy-list-manager;
+
+@import './palette.scss';
+@include mat.core();
+
+$tidy-primary: mat.define-palette($tidy-asparagus);
+$tidy-accent: mat.define-palette($tidy-coral);
+$tidy-warn: mat.define-palette(mat.$deep-orange-palette);
+
+$tidy-typography: mat.define-typography-config($font-family: 'Open Sans');
+
+$tidy-theme: mat.define-light-theme((
+  color: (
+    primary: $tidy-primary,
+    accent: $tidy-accent,
+    warn: $tidy-warn
+  ),
+  typography: $tidy-typography
+));
+
+@include mat.all-component-themes($tidy-theme);
+@include tidy-list-manager.theme($tidy-theme);
+

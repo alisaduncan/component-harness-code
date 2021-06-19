@@ -17,7 +17,6 @@ export class SentimentRatingComponent{
   public sentimentRating = [1, 2, 3, 4, 5];
   @Input() public rate = 0;
   @Output() public changed = new EventEmitter<number>();
-  constructor() { }
 
   public onRating(rating: number): void {
     this.rate = rating;

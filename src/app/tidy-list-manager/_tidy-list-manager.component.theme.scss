@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin color($theme) {
+  $color-config:    mat.get-color-config($theme);
+  $background: map.get($theme, 'background');
+
+  .tidy-list-main {
+    background: map.get($background, 'background');
+  }
+}
+
+@mixin theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
+}

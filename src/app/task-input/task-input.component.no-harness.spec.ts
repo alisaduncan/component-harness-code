@@ -36,10 +36,10 @@ describe('TaskInputComponent - no harness', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not show add add button until task text is added and task is rated',fakeAsync(() => {
+  it('should not enable add button until task text is added and task is rated',fakeAsync(() => {
     const ratingChangedSpy = spyOn(component, 'onRatingChanged').and.callThrough();
     const descriptionChangedSpy = spyOn(component, 'onDescriptionChanged').and.callThrough();
-    expect(fixture.debugElement.query(By.css('button'))).toBeFalsy();
+    expect(fixture.debugElement.query(By.css('button')).nativeElement.disabled).toBeTruthy();
     const inputEl = fixture.debugElement.query(By.css('input'));
     expect(inputEl).toBeTruthy();
 
