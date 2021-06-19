@@ -109,7 +109,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://alisaduncan.github.io/component-harness-code/"
+            "baseHref": "/component-harness-code/"
           }
         }
       }
