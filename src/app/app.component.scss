@@ -1,15 +1,7 @@
-//h1 {
-//  width: 100%;
-//  text-align: center;
-//}
 .tidy-task-content {
-  background: url('/assets/tidy-background.jpg') no-repeat;
+  background: url(/assets/tidy-background.jpg) no-repeat;
   height: 100%;
   width: 100%;
   position: absolute;
-  //top: 0;
-  //left: 0;
-  //display: block;
-  //background: #7cc41d;
   background-size: cover;
 }
